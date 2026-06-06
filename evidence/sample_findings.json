@@ -1,0 +1,61 @@
+{
+  "scan_context": {
+    "scan_result_id": 42,
+    "package_name": "lodash",
+    "latest_version": "4.17.21",
+    "previous_version": "4.17.20",
+    "status": "completed",
+    "score": 31,
+    "risk_level": "medium"
+  },
+  "scan_findings_example": [
+    {
+      "scan_result_id": 42,
+      "package_name": "lodash",
+      "finding_type": "EXECUTABLE_BINARY",
+      "severity": "high",
+      "category": "binary",
+      "file_path": "bin/native.node",
+      "description": "Executable binary found.",
+      "evidence": "magic:ELF"
+    },
+    {
+      "scan_result_id": 42,
+      "package_name": "lodash",
+      "finding_type": "INSTALL_HOOK_PRESENT",
+      "severity": "medium",
+      "category": "scripts",
+      "file_path": "package/package.json",
+      "description": "Install lifecycle hook is present in package scripts.",
+      "evidence": "postinstall=node scripts/setup.js"
+    }
+  ],
+  "score_breakdown_example": [
+    {
+      "finding_type": "EXECUTABLE_BINARY",
+      "score_delta": 25
+    },
+    {
+      "finding_type": "INSTALL_HOOK_PRESENT",
+      "score_delta": 5
+    }
+  ],
+  "detector_output_example": [
+    {
+      "finding_type": "OBFUSCATED_CODE",
+      "severity": "medium",
+      "category": "source_code",
+      "file_path": "package/dist/index.js",
+      "description": "Obfuscation pattern detected in JavaScript source.",
+      "evidence": "_0x3f9ab1(...) with unusually long encoded fragments"
+    },
+    {
+      "finding_type": "SIZE_INCREASE_MEDIUM",
+      "severity": "medium",
+      "category": "size",
+      "file_path": null,
+      "description": "Package unpacked size increased significantly.",
+      "evidence": "previous=102400, latest=151552"
+    }
+  ]
+}

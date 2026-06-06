@@ -1,0 +1,148 @@
+{
+  "examples": {
+    "health": {
+      "status": "ok",
+      "service": "npm-sentinel-api"
+    },
+    "enqueue_scan": {
+      "status": "queued",
+      "package_name": "lodash",
+      "reason": "manual"
+    },
+    "enqueue_scan_scoped_package": {
+      "status": "queued",
+      "package_name": "@types/node",
+      "reason": "scheduler"
+    },
+    "enqueue_top_packages_batch": {
+      "status": "queued",
+      "source": "top_packages",
+      "requested": 3,
+      "enqueued": 3,
+      "skipped": 0,
+      "reason": "manual_batch"
+    },
+    "packages": {
+      "items": [
+        {
+          "id": 1,
+          "name": "lodash",
+          "latest_scanned_version": "4.17.21",
+          "last_scanned_at": "2026-05-27T10:01:01Z",
+          "latest_scan_risk_level": "medium"
+        }
+      ],
+      "total": 1,
+      "limit": 20,
+      "offset": 0
+    },
+    "package_detail": {
+      "id": 1,
+      "name": "lodash",
+      "latest_scanned_version": "4.17.21",
+      "last_scanned_at": "2026-05-27T10:01:01Z",
+      "versions_count": 2,
+      "findings_count": 2,
+      "latest_scan": {
+        "id": 42,
+        "package_id": 1,
+        "package_name": "lodash",
+        "latest_version": "4.17.21",
+        "previous_version": "4.17.20",
+        "status": "completed",
+        "score": 31,
+        "risk_level": "medium",
+        "error_message": null,
+        "started_at": "2026-05-27T10:00:00Z",
+        "finished_at": "2026-05-27T10:01:01Z",
+        "created_at": "2026-05-27T10:00:00Z"
+      }
+    },
+    "package_versions": {
+      "items": [
+        {
+          "id": 10,
+          "package_id": 1,
+          "package_name": "lodash",
+          "version": "4.17.21",
+          "published_at": "2026-05-27T09:59:00Z",
+          "tarball_url": "https://registry.npmjs.org/lodash/-/lodash-4.17.21.tgz",
+          "integrity": "sha512-example",
+          "unpacked_size": 151552,
+          "file_count": 122,
+          "package_json": {
+            "name": "lodash",
+            "version": "4.17.21"
+          },
+          "dependencies": {},
+          "scripts": {
+            "postinstall": "node scripts/setup.js"
+          },
+          "created_at": "2026-05-27T10:00:00Z"
+        }
+      ],
+      "total": 1,
+      "limit": 20,
+      "offset": 0
+    },
+    "scans": {
+      "items": [
+        {
+          "id": 42,
+          "package_id": 1,
+          "package_name": "lodash",
+          "latest_version": "4.17.21",
+          "previous_version": "4.17.20",
+          "status": "completed",
+          "score": 31,
+          "risk_level": "medium",
+          "error_message": null,
+          "started_at": "2026-05-27T10:00:00Z",
+          "finished_at": "2026-05-27T10:01:01Z",
+          "created_at": "2026-05-27T10:00:00Z"
+        }
+      ],
+      "total": 1,
+      "limit": 20,
+      "offset": 0
+    },
+    "findings": {
+      "items": [
+        {
+          "id": 100,
+          "scan_result_id": 42,
+          "package_id": 1,
+          "package_name": "lodash",
+          "finding_type": "EXECUTABLE_BINARY",
+          "severity": "high",
+          "category": "binary",
+          "file_path": "bin/native.node",
+          "description": "Executable binary found.",
+          "evidence": "magic:ELF",
+          "created_at": "2026-05-27T10:01:00Z"
+        },
+        {
+          "id": 101,
+          "scan_result_id": 42,
+          "package_id": 1,
+          "package_name": "lodash",
+          "finding_type": "INSTALL_HOOK_PRESENT",
+          "severity": "medium",
+          "category": "scripts",
+          "file_path": "package/package.json",
+          "description": "Install lifecycle hook is present in package scripts.",
+          "evidence": "postinstall=node scripts/setup.js",
+          "created_at": "2026-05-27T10:01:00Z"
+        }
+      ],
+      "total": 2,
+      "limit": 20,
+      "offset": 0
+    },
+    "docs_endpoints": {
+      "swagger_ui": "/docs",
+      "redoc": "/redoc",
+      "openapi_json": "/openapi.json"
+    }
+  }
+}
