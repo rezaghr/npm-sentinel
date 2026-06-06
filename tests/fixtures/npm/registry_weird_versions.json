@@ -1,0 +1,75 @@
+{
+  "name": "example-pkg",
+  "dist-tags": {
+    "latest": "1.0.1-beta"
+  },
+  "time": {
+    "created": "2024-01-01T00:00:00.000Z",
+    "modified": "2024-03-01T00:00:00.000Z",
+    "1.0.0": "2024-01-10T00:00:00.000Z",
+    "1.0.1-beta": "2024-02-01T00:00:00.000Z",
+    "0.9.9": "2024-02-20T00:00:00.000Z",
+    "2.0.0-alpha": "2024-03-01T00:00:00.000Z"
+  },
+  "versions": {
+    "0.9.9": {
+      "name": "example-pkg",
+      "version": "0.9.9",
+      "dist": {
+        "tarball": "https://registry.npmjs.org/example-pkg/-/example-pkg-0.9.9.tgz",
+        "integrity": "sha512-0999",
+        "unpackedSize": 900,
+        "fileCount": 10
+      },
+      "dependencies": {
+        "left-pad": "^1.3.0"
+      },
+      "scripts": {}
+    },
+    "1.0.0": {
+      "name": "example-pkg",
+      "version": "1.0.0",
+      "dist": {
+        "tarball": "https://registry.npmjs.org/example-pkg/-/example-pkg-1.0.0.tgz",
+        "integrity": "sha512-1000",
+        "unpackedSize": 1000,
+        "fileCount": 12
+      },
+      "dependencies": {
+        "chalk": "^5.0.0"
+      },
+      "scripts": {
+        "postinstall": "node postinstall.js"
+      }
+    },
+    "1.0.1-beta": {
+      "name": "example-pkg",
+      "version": "1.0.1-beta",
+      "dist": {
+        "tarball": "https://registry.npmjs.org/example-pkg/-/example-pkg-1.0.1-beta.tgz",
+        "integrity": "sha512-101beta",
+        "unpackedSize": 1100,
+        "fileCount": 15
+      },
+      "dependencies": {
+        "chalk": "^5.1.0",
+        "debug": "^4.3.0"
+      },
+      "scripts": {
+        "build": "tsc"
+      }
+    },
+    "2.0.0-alpha": {
+      "name": "example-pkg",
+      "version": "2.0.0-alpha",
+      "dist": {
+        "tarball": "https://registry.npmjs.org/example-pkg/-/example-pkg-2.0.0-alpha.tgz",
+        "integrity": "sha512-200alpha",
+        "unpackedSize": 1500,
+        "fileCount": 20
+      },
+      "dependencies": {},
+      "scripts": {}
+    }
+  }
+}

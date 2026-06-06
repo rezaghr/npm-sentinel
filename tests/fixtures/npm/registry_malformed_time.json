@@ -1,0 +1,22 @@
+{
+  "name": "broken-package",
+  "dist-tags": {
+    "latest": "1.0.0"
+  },
+  "time": {
+    "created": "2024-01-01T00:00:00.000Z",
+    "modified": "2024-01-02T00:00:00.000Z",
+    "1.0.0": "not-a-date"
+  },
+  "versions": {
+    "1.0.0": {
+      "name": "broken-package",
+      "version": "1.0.0",
+      "dist": {
+        "tarball": "https://registry.npmjs.org/broken-package/-/broken-package-1.0.0.tgz"
+      },
+      "dependencies": {},
+      "scripts": {}
+    }
+  }
+}
