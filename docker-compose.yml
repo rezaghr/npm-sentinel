@@ -1,0 +1,85 @@
+services:
+  api:
+    build: .
+    command: sh -c "alembic upgrade head && uvicorn app.main:app --host 0.0.0.0 --port 8000"
+    environment:
+      APP_ENV: local
+      LOG_LEVEL: INFO
+      SERVICE_NAME: npm-sentinel-api
+      DATABASE_URL: postgresql+psycopg://npm_sentinel:npm_sentinel@postgres:5432/npm_sentinel
+      CELERY_BROKER_URL: amqp://npm_sentinel:npm_sentinel@rabbitmq:5672//
+    ports:
+      - "8000:8000"
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "python -c \"import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/api/v1/health', timeout=2)\"",
+        ]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    depends_on:
+      postgres:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+
+  worker:
+    build: .
+    command: celery -A app.worker.main:celery_app worker --loglevel=INFO --concurrency=5 --without-gossip --without-mingle --without-heartbeat
+    environment:
+      APP_ENV: local
+      LOG_LEVEL: INFO
+      SERVICE_NAME: npm-sentinel-worker
+      DATABASE_URL: postgresql+psycopg://npm_sentinel:npm_sentinel@postgres:5432/npm_sentinel
+      CELERY_BROKER_URL: amqp://npm_sentinel:npm_sentinel@rabbitmq:5672//
+    depends_on:
+      postgres:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+      api:
+        condition: service_healthy
+
+  scheduler:
+    build: .
+    command: python -m app.scheduler.main
+    environment:
+      APP_ENV: local
+      LOG_LEVEL: INFO
+      SERVICE_NAME: npm-sentinel-scheduler
+      DATABASE_URL: postgresql+psycopg://npm_sentinel:npm_sentinel@postgres:5432/npm_sentinel
+      CELERY_BROKER_URL: amqp://npm_sentinel:npm_sentinel@rabbitmq:5672//
+    depends_on:
+      postgres:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+      api:
+        condition: service_healthy
+
+  postgres:
+    image: postgres:18.4-alpine
+    environment:
+      POSTGRES_DB: npm_sentinel
+      POSTGRES_USER: npm_sentinel
+      POSTGRES_PASSWORD: npm_sentinel
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U npm_sentinel -d npm_sentinel"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  rabbitmq:
+    image: rabbitmq:4.3.0-alpine
+    environment:
+      RABBITMQ_DEFAULT_USER: npm_sentinel
+      RABBITMQ_DEFAULT_PASS: npm_sentinel
+    ports:
+      - "5672:5672"
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "-q", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
